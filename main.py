@@ -52,13 +52,42 @@ class MatchLogsLink:
         self.log_type = log_type
 
         self.link = f'https://fbref.com/en/squads/{self.team_id}/{self.year}/matchlogs/{self.comp_id}/{DataType[self.log_type]}/{Teams[self.team_id]}-Match-Logs-{Comps[self.comp_id]}'
-        
+
     def __repr__(self):
         return self.link
 
+class Link2Ids:
+    def __init__(self, str_link: str) -> None:
+        self._str_link = str_link
+        self.team_id = None
+        self.year = None
+        self.comp_id = None
+        self.log_type = None
+
+        self._process_link()
+    
+    def _process_link(self):
+        self._str_link.split('/')
+
+    @property
+    def team_id(self):
+        return self.team_id
+
+    @property
+    def year(self):
+        return self.year
+    
+    @property
+    def comp_id(self):
+        return self.comp_id
+    
+    @property
+    def log_type(self):
+        return self.log_type
+
 
 class Data:
-    def __init__(self, link):
+    def __init__(self, link: MatchLogsLink):
         self.link = str(link)
     
     def fbref2pandas(self):
@@ -73,4 +102,4 @@ print(link)
 
 data = Data(link)
 
-# print(data.fbref2pandas())
+print(data.fbref2pandas())
