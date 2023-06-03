@@ -3,6 +3,7 @@
 A scraper that directly gives football(not soccer) data from FBRef website directly to Pandas dataframe. Major teams and leagues supported.
 
 [Project Repository](https://github.com/yash-srivastava19/fbref2pandas)
+[PyPi Project](https://pypi.org/project/fbref2pandas/)
 
 Contribute to the Project so that everyone can benefit from it.
 
