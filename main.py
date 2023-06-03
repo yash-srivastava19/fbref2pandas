@@ -35,17 +35,8 @@ Comps = {
     'c882': 'Europa-Conference-League',
 }
 
-
-"https://fbref.com/en/squads/53a2f082/2022-2023/all_comps/Real-Madrid-Stats-All-Competitions"    
-cl = "https://fbref.com/en/squads/53a2f082/2022-2023/c8/Real-Madrid-Stats-Champions-League"
-"https://fbref.com/en/squads/53a2f082/2022-2023/c569/Real-Madrid-Stats-Copa-del-Rey"
-"https://fbref.com/en/squads/53a2f082/2022-2023/c646/Real-Madrid-Stats-Supercopa-de-Espana"
-"https://fbref.com/en/squads/53a2f082/2022-2023/c122/Real-Madrid-Stats-UEFA-Super-Cup"
-
-
-bc = "https://fbref.com/en/squads/206d90db/2022-2023/matchlogs/c12/shooting/Barcelona-Match-Logs-La-Liga"
 class MatchLogsLink:
-    def __init__(self, team_id,year,comp_id, log_type):
+    def __init__(self,team_id,year,comp_id, log_type):
         self.team_id = team_id
         self.year = year
         self.comp_id = comp_id
@@ -56,50 +47,19 @@ class MatchLogsLink:
     def __repr__(self):
         return self.link
 
-class Link2Ids:
-    def __init__(self, str_link: str) -> None:
-        self._str_link = str_link
-        self.team_id = None
-        self.year = None
-        self.comp_id = None
-        self.log_type = None
-
-        self._process_link()
-    
-    def _process_link(self):
-        self._str_link.split('/')
-
-    @property
-    def team_id(self):
-        return self.team_id
-
-    @property
-    def year(self):
-        return self.year
-    
-    @property
-    def comp_id(self):
-        return self.comp_id
-    
-    @property
-    def log_type(self):
-        return self.log_type
-
 
 class Data:
     def __init__(self, link: MatchLogsLink):
         self.link = str(link)
     
     def fbref2pandas(self):
-        data_list = pd.read_html(self.link)
+        try:
+            data_list = pd.read_html(self.link)
+        
+        except Exception as e:
+            print(f'The link {repr(self.link)} is not able to scrape the table from the FBRef website. Try checking for some typos.')    
+        
         for table in data_list:
             df = pd.DataFrame(table)
         
         return df
-
-link = MatchLogsLink('206d90db', '2022-2023', 'c12', 'shooting')
-print(link)
-
-data = Data(link)
-
-print(data.fbref2pandas())
