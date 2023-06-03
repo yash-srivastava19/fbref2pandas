@@ -61,11 +61,12 @@ Just copy the `team_id` and pass as the first argument.
 After passing these 4 parameters to the `MatchLogsLink` object, most of the task is done. Just create a new `Data` object, and pass the above `MatchLogsLink` object. An example of this would be : 
 
 ```
+from fbref2pandas.classes import MatchLogsLink, Data
+
 link = MatchLogsLink('206d90db', '2022-2023', 'c12', 'shooting')
 # print(link)  
 
 data = Data(link)
-
 ```
 If the link is correct, there shouldn't be a problem. Now, to get the data as a `DataFrame` object, just call the function `fbref2pandas()` of the `Data` object. The functions returns the data as a pandas `Dataframe`. If the link is incorrect, an exception is raised. Just double check if the data from the table above. Enjoy the data. 
 
